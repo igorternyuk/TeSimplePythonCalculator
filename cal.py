@@ -3,28 +3,34 @@ from tkinter import*
         
 def buttonClick(input):
     text_input.set(text_input.get()+str(input))
+    
 
 def onButtonChangeSign():
-    val = eval(text_input.get());
+    val = eval(text_input.get())
     val = -1*val;
     text_input.set(str(val))
+    
 
 def onButtonClear():
     val = text_input.get()
     val = val[:len(val)-1]
     text_input.set(val)
     
+    
 def onButtonClearAll():
     text_input.set("")
+    
 
 def onButtonEquals():
-    text_input.set("{0:.12f}".format(eval(text_input.get())))
+    text_input.set("{0:.6f}".format(eval(text_input.get())))
+    
 
 def validate(char, entry_value):
-    if char in '0123456789.-+*/':
+    if char in '0123456789.-+*/()':
         return True
     else:
         return False
+    
 
 window = Tk()
 window.title("Calculator")
@@ -73,6 +79,15 @@ btnSign=Button(window,padx=35,pady=24,bd=4,fg="black",font=('arial',14,'bold'),
             text="+/-",bg="powder blue", command=onButtonChangeSign).grid(row=4,column=2)
 btnDivision=Button(window,padx=45,pady=20,bd=4,fg="black",font=('arial',20,'bold'),
             text="/",bg="powder blue", command=lambda:buttonClick("/")).grid(row=4,column=3)
+#===================================================================================================#
+btnParenthLeft=Button(window,padx=40,pady=20,bd=4,fg="black",font=('arial',20,'bold'),
+            text="(",bg="powder blue", command=lambda:buttonClick("(")).grid(row=4,column=0)
+btnParenthRight=Button(window,padx=45,pady=20,bd=4,fg="black",font=('arial',20,'bold'),
+            text=")",bg="powder blue", command=lambda:buttonClick(")")).grid(row=4,column=1)
+btnSquareRoot=Button(window,padx=35,pady=24,bd=4,fg="black",font=('arial',14,'bold'),
+            text="sqrt",bg="powder blue", command=lambda:buttonClick("**0.5")).grid(row=4,column=2)
+btnCubicRoot=Button(window,padx=25,pady=20,bd=4,fg="black",font=('arial',14,'bold'),
+            text="qbrt",bg="powder blue", command=lambda:buttonClick("**(1/3)")).grid(row=4,column=3)
 #===================================================================================================#
 btnClear=Button(window,padx=40,pady=25,bd=4,fg="black",font=('arial',14,'bold'),
             text="C",bg="powder blue", command=onButtonClear).grid(row=5,column=0)
